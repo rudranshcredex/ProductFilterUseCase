@@ -81,16 +81,20 @@
 
         </div>
 
-        <div>
+        <div lwc:if={showProducts}>
             <table class="slds-table slds-table_bordered slds-table_cell-buffer">
                 <thead>
                     <tr>
+                        <th>Product Type</th>
+                        <th>Product Family</th>
                         <th>Products</th>
                     </tr>
                 </thead>
                 <tbody>
                     <template for:each={newFieldList} for:item="item">
                         <tr key={item.Id}>
+                            <td>{item.Type__c}</td>
+                            <td>{item.Product_Family__c}</td>
                             <td>{item.Name}</td>
                         </tr>
                     </template>

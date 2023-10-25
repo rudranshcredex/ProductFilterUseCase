@@ -13,6 +13,7 @@ export default class DisplayTypeAndFamily extends LightningElement {
     showType = false;
     showFamily = false;
     @track newFieldList;
+    showProducts = false;
 
     connectedCallback() {
         getFieldsFromProductMethod().then(result => {
@@ -72,22 +73,19 @@ export default class DisplayTypeAndFamily extends LightningElement {
     }
 
     filterProducts() {
-        if (this.selectedFamily) {
-            this.newFieldList = this.fieldList.filter(item => item.Product_Family__c === this.selectedFamily);
-            console.log('this.newFieldList---->', JSON.stringify(this.newFieldList));
-        }
-        else if (this.selectedType) {
+        if (this.selectedType && this.selectedFamily) {
+            this.newFieldList = this.fieldList.filter(item =>
+                item.Type__c === this.selectedType && item.Product_Family__c === this.selectedFamily
+            );
+        } else if (this.selectedType) {
             this.newFieldList = this.fieldList.filter(item => item.Type__c === this.selectedType);
-            console.log('this.newFieldList---->', JSON.stringify(this.newFieldList));
-        }
-
-        else if (this.selectedType !== null && this.selectedFamily !== null) {
+        } else if (this.selectedFamily) {
             this.newFieldList = this.fieldList.filter(item => item.Product_Family__c === this.selectedFamily);
-            this.newFieldList = this.newFieldList.filter(item => item.Type__c === this.selectedType);
-
-            console.log('this.newFieldList---->', JSON.stringify(this.newFieldList));
-            
+        } else {
+            this.newFieldList = this.fieldList;
         }
+        console.log('this.newFieldList---->', JSON.stringify(this.newFieldList));
+        this.showProducts = true;
     }
 
 }
