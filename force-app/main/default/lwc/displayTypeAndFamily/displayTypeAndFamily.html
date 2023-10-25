@@ -1,0 +1,101 @@
+<template>
+    <div class="main">
+        <h1>LWC Display</h1>
+        <div>
+            <table class="slds-table slds-table_bordered slds-table_cell-buffer">
+                <thead>
+                    <tr>
+                        <th>Type of Products</th>
+                        <th>Product Family</th>
+                        <th>Products</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <template for:each={fieldList} for:item="item">
+                        <tr key={item.Id}>
+                            <td>{item.Type__c}</td>
+                            <td>{item.Product_Family__c}</td>
+                            <td>{item.Name}</td>
+                        </tr>
+                    </template>
+                </tbody>
+            </table>
+        </div>
+
+        <div>
+            <table class="slds-table slds-table_bordered slds-table_cell-buffer">
+                <thead>
+                    <tr>
+                        <th>Type of Products</th>
+                        <th>Product Family</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <div if:false={showType}>
+                                <select name="productType" onchange={handleTypeSelect}>
+                                    <option value="">Select</option>
+                                    <template for:each={typeOptionsWithoutFamily} for:item="option">
+                                        <option key={option} value={option}>{option}</option>
+                                    </template>
+                                </select>
+                            </div>
+                            <div if:true={showType}>
+                                <select name="productType" onchange={handleTypeSelect}>
+                                    <option value="">Select</option>
+                                    <template for:each={typeOptionsWithFamily} for:item="option">
+                                        <option key={option} value={option}>{option}</option>
+                                    </template>
+                                </select>
+                            </div>
+                        </td>
+                        <td>
+                            <div if:false={showFamily}>
+                                <select name="productFamily" onchange={handleFamilySelect}>
+                                    <option value="">Select</option>
+                                    <template for:each={familyWithoutType} for:item="item">
+                                        <option key={item} value={item}>{item}</option>
+                                    </template>
+                                </select>
+                            </div>
+                            <div if:true={showFamily}>
+                                <select name="productFamily" onchange={handleFamilySelect}>
+                                    <option value="">Select</option>
+                                    <template for:each={familyWithType} for:item="item">
+                                        <option key={item} value={item}>{item}</option>
+                                    </template>
+                                </select>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <lightning-button 
+              variant="brand"
+              label="Add filter" 
+              onclick={filterProducts} 
+            ></lightning-button>
+
+
+        </div>
+
+        <div>
+            <table class="slds-table slds-table_bordered slds-table_cell-buffer">
+                <thead>
+                    <tr>
+                        <th>Products</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <template for:each={newFieldList} for:item="item">
+                        <tr key={item.Id}>
+                            <td>{item.Name}</td>
+                        </tr>
+                    </template>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</template>
