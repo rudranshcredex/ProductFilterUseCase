@@ -1,7 +1,9 @@
 <template>
     <div class="main">
-        <h1>LWC Display</h1>
-        <div>
+        <h1 class="slds-text-heading_large">LWC Display</h1>
+
+        <!-- Unfiltered Table -->
+        <div class="slds-m-top_large">
             <table class="slds-table slds-table_bordered slds-table_cell-buffer">
                 <thead>
                     <tr>
@@ -22,7 +24,8 @@
             </table>
         </div>
 
-        <div>
+        <div class="slds-m-top_medium">
+            <!-- Filters -->
             <table class="slds-table slds-table_bordered slds-table_cell-buffer">
                 <thead>
                     <tr>
@@ -34,7 +37,7 @@
                     <tr>
                         <td>
                             <div if:false={showType}>
-                                <select name="productType" onchange={handleTypeSelect}>
+                                <select name="productType" class="slds-select" onchange={handleTypeSelect}>
                                     <option value="">Select</option>
                                     <template for:each={typeOptionsWithoutFamily} for:item="option">
                                         <option key={option} value={option}>{option}</option>
@@ -42,7 +45,7 @@
                                 </select>
                             </div>
                             <div if:true={showType}>
-                                <select name="productType" onchange={handleTypeSelect}>
+                                <select name="productType" class="slds-select" onchange={handleTypeSelect}>
                                     <option value="">Select</option>
                                     <template for:each={typeOptionsWithFamily} for:item="option">
                                         <option key={option} value={option}>{option}</option>
@@ -52,7 +55,7 @@
                         </td>
                         <td>
                             <div if:false={showFamily}>
-                                <select name="productFamily" onchange={handleFamilySelect}>
+                                <select name="productFamily" class="slds-select" onchange={handleFamilySelect}>
                                     <option value="">Select</option>
                                     <template for:each={familyWithoutType} for:item="item">
                                         <option key={item} value={item}>{item}</option>
@@ -60,7 +63,7 @@
                                 </select>
                             </div>
                             <div if:true={showFamily}>
-                                <select name="productFamily" onchange={handleFamilySelect}>
+                                <select name="productFamily" class="slds-select" onchange={handleFamilySelect}>
                                     <option value="">Select</option>
                                     <template for:each={familyWithType} for:item="item">
                                         <option key={item} value={item}>{item}</option>
@@ -72,16 +75,15 @@
                 </tbody>
             </table>
 
-            <lightning-button 
-              variant="brand"
-              label="Add filter" 
-              onclick={filterProducts} 
-            ></lightning-button>
+            <div class="button">
+                <lightning-button variant="brand" label="Add filter" class="slds-m-top_medium"
+                    onclick={filterProducts}></lightning-button>
 
-
+            </div>
         </div>
 
-        <div lwc:if={showProducts}>
+        <!-- Filtered Table -->
+        <div lwc:if={showProducts} class="slds-m-top_large">
             <table class="slds-table slds-table_bordered slds-table_cell-buffer">
                 <thead>
                     <tr>

@@ -10,10 +10,11 @@ export default class DisplayTypeAndFamily extends LightningElement {
     @track familyWithType = [];
     @track familyWithoutType = [];
     @track selectedFamily = '';
+    @track newFieldList;
+    
+    showProducts = false;
     showType = false;
     showFamily = false;
-    @track newFieldList;
-    showProducts = false;
 
     connectedCallback() {
         getFieldsFromProductMethod().then(result => {
